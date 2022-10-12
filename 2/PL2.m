@@ -48,3 +48,20 @@ p_ab/p_b
 'Valor Teórico'
 1/(2+1)
 
+%% Ex. 2
+% a)
+n = 20;
+m = 100;
+
+sample_size = 1e4;
+
+for samples = 1:sample_size-1
+    count = 0;
+    for sample = round(rand(n, m)* 100)
+        if length(unique(sample)) == n
+            count = count + 1;
+        end  
+    end
+    probs(samples) = count/n;
+end
+p = sum(probs)/sample_size
