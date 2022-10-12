@@ -30,4 +30,5 @@ codegen/
 # Octave session info
 octave-workspace
 
-# End of https://mrkandreev.name/snippets/gitignore-generator/#MATLAB
+# Temporary files
+*.tmp
