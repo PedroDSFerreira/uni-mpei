@@ -49,7 +49,7 @@ p_ab/p_b
 1/(2+1)
 
 %% Ex. 2
-% a)
+%% a)
 n = 20;
 m = 100;
 
@@ -65,3 +65,19 @@ for samples = 1:sample_size-1
     probs(samples) = count/n;
 end
 p = sum(probs)/sample_size
+
+%% b)
+n = 20;
+m = 100;
+
+sample_size = 1e4;
+count = 0;
+for samples = 1:sample_size-1
+    for sample = round(rand(n, m)* 100)
+        if length(unique(sample)) <= n-2
+            count = count + 1;
+            break
+        end  
+    end
+end
+p = count/sample_size
