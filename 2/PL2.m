@@ -123,3 +123,19 @@ plot(m, p, '-.')
 legend(strcat('n=', num2str(n)));
 xlabel('m');
 ylabel('Probability');
+
+
+% Ex. 3
+%% a)
+k = 10; % number of keys
+T = 1000; % array size
+
+sample_size = 1e6;
+
+count = 0;
+for sample = randi(T, k, sample_size)
+    if length(unique(sample)) < k-1
+        count = count + 1;
+    end
+end
+p = count/sample_size
