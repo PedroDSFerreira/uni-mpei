@@ -159,3 +159,23 @@ plot(k, p, '-.')
 legend(strcat('T=', num2str(T)));
 xlabel('Keys');
 ylabel('Probability');
+
+%% c)
+k = 50; % number of keys
+T = 100:100:1000; % array size
+sample_size = 1e4;
+
+for i = 1:length(T)
+    count = 0;
+    for sample = randi(T(i), k, sample_size)
+        if length(unique(sample)) == k
+            count = count + 1;
+        end
+    end
+    p(i) = count/sample_size;
+end
+
+plot(T, p, '-.')
+legend(strcat('k=', num2str(k)));
+xlabel('T');
+ylabel('Probability');
