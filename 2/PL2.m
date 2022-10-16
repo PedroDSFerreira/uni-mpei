@@ -103,4 +103,23 @@ for i = 1:2
     ylabel('Probability');
 end
 
+%% d)
 
+m = [200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000];
+n = 100;
+
+sample_size = 1e5;
+for i = 1:length(m)
+    count = 0;
+    for sample = randi(m(i), n, sample_size)
+        if length(unique(sample)) < n-1
+            count = count + 1;
+        end
+    end
+    p(i) = count/sample_size;
+end
+
+plot(m, p, '-.')
+legend(strcat('n=', num2str(n)));
+xlabel('m');
+ylabel('Probability');
