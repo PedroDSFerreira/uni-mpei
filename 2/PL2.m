@@ -139,3 +139,23 @@ for sample = randi(T, k, sample_size)
     end
 end
 p = count/sample_size
+
+%% b)
+k = 10:100:1000; % number of keys
+T = 1000; % array size
+sample_size = 1e4;
+
+for i = 1:length(k)
+    count = 0;
+    for sample = randi(T, k(i), sample_size)
+        if length(unique(sample)) < k(i)-1
+            count = count + 1;
+        end
+    end
+    p(i) = count/sample_size;
+end
+
+plot(k, p, '-.')
+legend(strcat('T=', num2str(T)));
+xlabel('Keys');
+ylabel('Probability');
