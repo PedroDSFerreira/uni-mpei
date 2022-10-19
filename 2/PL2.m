@@ -179,3 +179,43 @@ plot(T, p, '-.')
 legend(strcat('k=', num2str(k)));
 xlabel('T');
 ylabel('Probability');
+
+
+% Ex. 4 - TODO
+%% a)
+p = 0.5;
+d = 365; % days
+sample_size = 1e4;
+
+
+% Ex. 7
+%% a)
+% Teórica
+
+% P(ser do Carlos | tem um bug) = P(ser do Carlos n tem um bug)/P(tem um
+% bug) ?
+
+
+% P(ser do Carlos n tem um bug) = P(tem um bug | ser do Carlos) * P(ser do
+% Carlos)
+pCbug = 0.001*0.5;
+
+% P(tem um bug) = P(tem um bug | ser do Carlos)+P(tem um bug | ser do
+% André)+P(tem um bug | ser do Bruno)
+pbug = 0.01*0.2 + 0.05*0.3 + 0.001*0.5;
+
+% P(ser do Carlos | tem um bug) = P(ser do Carlos n tem um bug)/P(tem um
+% bug)
+probC = pCbug/pbug
+
+
+% b)
+pAbug = 0.01*0.2;
+probA = pAbug/pbug
+
+pBbug = 0.05*0.3;
+probB = pBbug/pbug
+
+
+% Parte II
+% Ex. 2
