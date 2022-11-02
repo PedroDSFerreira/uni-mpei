@@ -12,10 +12,10 @@ A = [
     0.8, 0.2
     ];
 
-% vetor estacionário ([está presente, não está presente])
+% vetor ([está presente, não está presente])
 v = [1, 0];
 
-prob = v*A;
+prob = v*A^2;
 prob(1)
 
 %% b)
@@ -26,10 +26,10 @@ A = [
     0.8, 0.2
     ];
 
-% vetor estacionário ([está presente, não está presente])
+% vetor ([está presente, não está presente])
 v = [0, 1];
 
-prob = v*A;
+prob = v*A^2;
 prob(1)
 
 %% c)
@@ -46,7 +46,7 @@ results = zeros(1, sample_size);
 
 for j=1:sample_size
     v = [1, 0];
-    for week=1:weeks
+    for week=1:weeks*2-1
         v = v*A;
     end
     results(j) = v(1);
@@ -55,3 +55,19 @@ mean(results)
 
 %% d) TODO
 
+% matriz de transição
+A = [
+    0.7, 0.3; 
+    0.8, 0.2
+    ];
+
+classes = 30;
+results = zeros(1, classes);
+v = [0.85, 0.15];
+
+for class=1:classes
+    results(class) = v(2);
+    v = v*A;
+end
+
+stem(results)
