@@ -108,3 +108,22 @@ for i=1:30-1
 end
 
 round(v)
+
+%% d)
+
+% matriz de transição
+A = [
+    1/3 1/4 0;
+    1/3 11/20 1/2;
+    1/3 1/5 1/2
+];
+
+alunos = 90;
+
+v = [alunos/3; alunos/3; alunos/3];
+
+for i=1:30-1
+    v = A*v;
+end
+
+round(v)
