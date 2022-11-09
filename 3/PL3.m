@@ -147,7 +147,7 @@ for i=2:100
     probs(:,i) = v;
 end
 
-probs(20,2)
-probs(20,5)
-probs(20,10)
-probs(20,100)
+fprintf("2: %.5f\n", probs(20,2))
+fprintf("5: %.5f\n", probs(20,5))
+fprintf("10: %.5f\n", probs(20,10))
+fprintf("100: %.5f\n", probs(20,100))
