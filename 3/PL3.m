@@ -53,7 +53,7 @@ for j=1:sample_size
 end
 mean(results)
 
-%% d) TODO
+%% d)
 
 % matriz de transição
 A = [
@@ -71,3 +71,15 @@ for class=1:classes
 end
 
 stem(results)
+
+%% Ex. 2 - a)
+
+
+% matriz de transição
+A = [
+    1/3 1/4 0;
+    1/3 11/20 1/2;
+    1/3 1/5 1/2
+];
+
+% matriz é estocástica (soma das colunas==1)
