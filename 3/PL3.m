@@ -83,3 +83,10 @@ A = [
 ];
 
 % matriz é estocástica (soma das colunas==1)
+
+%% b)
+
+alunos = 90;
+
+v = [alunos/2; alunos/4; alunos/4];
+
