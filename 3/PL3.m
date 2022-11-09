@@ -134,3 +134,20 @@ A = rand(20);
 A = A./sum(A);
 % matriz não estocástica
 
+%% b)
+
+A = rand(20);
+A = A./sum(A);
+v = zeros(20, 1);
+v(1) = 1;
+probs = zeros(20, 100);
+probs(:,1) = v(1);
+for i=2:100
+    v = A*v;
+    probs(:,i) = v;
+end
+
+probs(20,2)
+probs(20,5)
+probs(20,10)
+probs(20,100)
