@@ -127,3 +127,9 @@ for i=1:30-1
 end
 
 round(v)
+
+%% Ex. 3 - a)
+
+A = rand(20);
+
+% matriz não estocástica
