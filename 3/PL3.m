@@ -151,3 +151,14 @@ fprintf("2: %.5f\n", probs(20,2))
 fprintf("5: %.5f\n", probs(20,5))
 fprintf("10: %.5f\n", probs(20,10))
 fprintf("100: %.5f\n", probs(20,100))
+
+%% Ex. 4 - a)
+p = 0.4;
+q = 0.6;
+
+A = [
+    p^2 0 0 q^2;
+    (1-p)^2 0 0 q*(1-q);
+    p*(1-p) 0 0 q*(1-q);
+    p*(1-p) 1 1 (1-q)^2
+];
