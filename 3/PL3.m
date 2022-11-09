@@ -131,5 +131,6 @@ round(v)
 %% Ex. 3 - a)
 
 A = rand(20);
-
+A = A./sum(A);
 % matriz não estocástica
+
