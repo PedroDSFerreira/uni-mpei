@@ -90,3 +90,21 @@ alunos = 90;
 
 v = [alunos/2; alunos/4; alunos/4];
 
+%% c)
+
+% matriz de transição
+A = [
+    1/3 1/4 0;
+    1/3 11/20 1/2;
+    1/3 1/5 1/2
+];
+
+alunos = 90;
+
+v = [alunos/2; alunos/4; alunos/4];
+
+for i=1:30-1
+    v = A*v;
+end
+
+round(v)
