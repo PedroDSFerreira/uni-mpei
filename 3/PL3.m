@@ -190,6 +190,9 @@ probs(:,200)
 
 %% c)
 
+p = 0.4;
+q = 0.6;
+
 A = [
     p^2 0 0 q^2;
     (1-p)^2 0 0 q*(1-q);
@@ -213,8 +216,20 @@ end
 
 v
 
-% 
-v = [1; 0; 0; 0];
+% algebraic method 1 (recomended)
+
+M= [A-eye(length(A));ones(1,length(A))];
+x= zeros(length(A) ,1);
+x= [x; 1];
+
+M\x
+
+% algebraic method 2 (recomended)
+M= [A-eye(length(A));ones(1,length(A))];
+x= zeros(length(A) ,1);
+x= [x; 1];
+sol = rref([M x]);
+sol(1:length(A), end)
 
 %% Ex. 5 - a)
 
