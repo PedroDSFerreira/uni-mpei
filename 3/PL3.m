@@ -290,3 +290,21 @@ resultado= prob1 * prob2; % CB
 %CB: apresentação do resultdo
 fprintf('Probabilidade de não chover no 2º e 3º dias dado que no dia 1 está sol = %4.3f\n', resultado)
 
+%% d)
+A = [
+    .7 .2 .1;
+    .2 .3 .5;
+    .3 .3 .4;
+];
+
+A= A';
+
+v = [1; 0; 0];% 1º dia -> sol
+
+% Janeiro -> 31 dias
+for day=1:31
+    v = A*v;
+end
+sol = round(v(1)*31)
+nuvens = round(v(2)*31)
+chuva = round(v(3)*31)
