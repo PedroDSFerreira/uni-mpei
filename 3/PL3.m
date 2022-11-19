@@ -302,9 +302,10 @@ A= A';
 v = [1; 0; 0];% 1º dia -> sol
 
 % Janeiro -> 31 dias
-for day=1:31
-    v = A*v;
-end
+v = A^30*v;
+
 sol = round(v(1)*31)
 nuvens = round(v(2)*31)
 chuva = round(v(3)*31)
+
+%% e)
