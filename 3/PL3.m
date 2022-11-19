@@ -417,3 +417,12 @@ end
 
 stem(probs)
 legend('P(1->3)', 'P(1->5)')
+
+% with n->+inf, lim(probability)=x
+
+%% d)
+Q = [
+    .8 0 .3;
+    .2 .6 .2;
+    0 .1 .4;
+    ];
