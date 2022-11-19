@@ -232,7 +232,7 @@ sol = rref([M x]);
 sol(1:length(A), end)
 
 %% Ex. 5 - a)
-
+% Matriz não estocátsica
 A = [
     .7 .2 .1;
     .2 .3 .5;
@@ -246,7 +246,7 @@ A = [
     .2 .3 .5;
     .3 .3 .4;
 ];
-
+A= A';
 v = [1; 0; 0];
 
 prob = A*v;
@@ -254,15 +254,39 @@ prob(1)^2
 
 %% c)
 % P(sol->Ñ chuva)*P(Ñ chuva->Ñ chuva)
+
+%CB: está a usar a notação errada, em MPEI usamos Xn nas colunas e Xn+1 nas
+%linhas. A soma das colunas tem de dar 1 em todas as  colunas
+ 
 A = [
     .7 .2 .1;
     .2 .3 .5;
     .3 .3 .4;
 ];
+% CB: transpondo a matriz fica na notação correta
+A= A';
+% sum(A)  % CB: verifique que a soma das colunas é 1 para todas as colunas
 
-v = [1; 0; 0];
-p1 = A*v;
+v0 = [1; 0; 0];
+
+% P(sol->Ñ chuva)
+v1 = A*v0; %CB: daqui obtém a probabilidade da 1ª transição
+
+prob1= sum(v1(1:2));  %CB: vai necessitar desta probabilidade mais tarde
+
+v1(3)= 0; % CB: alterar a probabilide de chuva para zero (somatório fica < 1)
+v1 = v1/sum(v1(1:2)); % normalize
+% CB: pode verificar agora que a soma de probabilidades de v1 é 1 e que a
+% probabilidade de chuva é zero
 
 
-v10 = [.7 .2 0]/.7+.2;
+
+% P(Ñ chuva->Ñ chuva)
+v2 = A*v1;
+%CB: aqui já não faz sentido normalizar v2 = v2/(v2(1)+v2(2)); % normalize
+prob2= sum(v2(1:2));  %CB: cálculo da probabilidade de transição de Ñ chuva->Ñ chuva
+resultado= prob1 * prob2; % CB
+
+%CB: apresentação do resultdo
+fprintf('Probabilidade de não chover no 2º e 3º dias dado que no dia 1 está sol = %4.3f\n', resultado)
 
