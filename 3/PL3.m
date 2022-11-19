@@ -378,5 +378,5 @@ for n = 0:100
     probs(n+1) = v_tmp(2);
 end
 
-stem(probs)<
+stem(probs)
 % with n->+inf, lim(probability)=0
