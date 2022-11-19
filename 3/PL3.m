@@ -371,12 +371,49 @@ A = [
     ];
 
 v = [1; 0; 0; 0; 0];
+
+% P(1->2)
 probs = [];
 
-for n = 0:100
-    v_tmp = (A^(n+1))*v;
-    probs(n+1) = v_tmp(2);
+for n = 1:100
+    v_tmp = (A^(n))*v;
+    probs(n) = v_tmp(2);
 end
 
 stem(probs)
 % with n->+inf, lim(probability)=0
+
+%% c)
+A = [
+    .8 0 0 .3 0;
+    .2 .6 0 .2 0;
+    0 .3 1 0 0;
+    0 .1 0 .4 0;
+    0 0 0 .1 1
+    ];
+
+v = [1; 0; 0; 0; 0];
+
+% P(1->3)
+probs = [];
+
+for n = 1:100
+    v_tmp = (A^(n))*v;
+    probs(n) = v_tmp(3);
+end
+
+hold on
+stem(probs)
+
+
+
+% P(1->5)
+probs = [];
+
+for n = 1:100
+    v_tmp = (A^(n))*v;
+    probs(n) = v_tmp(5);
+end
+
+stem(probs)
+legend('P(1->3)', 'P(1->5)')
