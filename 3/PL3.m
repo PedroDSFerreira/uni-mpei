@@ -317,11 +317,37 @@ A = [
 
 A= A';
 
-v = [0; 0; 1];% 1º dia -> chuva
+v = [0; 0; 1]; % 1º dia -> chuva
 
 % Janeiro -> 31 dias
 v = A^30*v;
 
-sol = round(v(1)*31)
-nuvens = round(v(2)*31)
-chuva = round(v(3)*31)
+days = round(v*31);
+
+sol = days(1)
+nuvens = days(2)
+chuva = days(3)
+
+%% f)
+A = [
+    .7 .2 .1;
+    .2 .3 .5;
+    .3 .3 .4;
+];
+
+A= A';
+
+
+p = [.1; .3; .5];
+
+% 1º dia -> chuva
+v = [0; 0; 1];
+
+% Janeiro -> 31 dias
+v = A^30*v;
+
+
+days = (v*31).*p;
+
+rheumatism_days = round(sum(days))
+
