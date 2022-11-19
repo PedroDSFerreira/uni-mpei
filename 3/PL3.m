@@ -362,3 +362,21 @@ A = [
     ];
 
 %% b)
+A = [
+    .8 0 0 .3 0;
+    .2 .6 0 .2 0;
+    0 .3 1 0 0;
+    0 .1 0 .4 0;
+    0 0 0 .1 1
+    ];
+
+v = [1; 0; 0; 0; 0];
+probs = [];
+
+for n = 0:100
+    v_tmp = (A^(n+1))*v;
+    probs(n+1) = v_tmp(2);
+end
+
+stem(probs)<
+% with n->+inf, lim(probability)=0
