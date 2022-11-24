@@ -476,9 +476,20 @@ B(2,1)
 
 %% Ex. 7 - a)
 
-A = [
-    
+H = [
+    0 0 0 0 1/3 0;
+    1 0 0 0 1/3 0;
+    0 1/2 0 1 0 0;
+    0 0 1 0 0 0;
+    0 1/2 0 0 0 0;
+    0 0 0 0 1/3 0
     ]
+
+%% b)
+% Spider trap: C-D
+% Dead-end: F
+
+%% c)
 
 % Anexo 
 function [state] = crawl(H, first, last)
