@@ -502,6 +502,19 @@ N = length(H);
 H(:, find(sum(H)==0)) = ones(N,1 )/N;
 H
 
+%% d)
+H = [
+    0 0 0 0 1/3 0;
+    1 0 0 0 1/3 0;
+    0 1/2 0 1 0 0;
+    0 0 1 0 0 0;
+    0 1/2 0 0 0 0;
+    0 0 0 0 1/3 0
+    ];
+N = length(H);
+H(:, find(sum(H)==0)) = ones(N,1 )/N;
+beta = .8;
+A = beta*H + (1-beta)*(1./(ones(N)*N))
 
 % Anexo 
 function [state] = crawl(H, first, last)
