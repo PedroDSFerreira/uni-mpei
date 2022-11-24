@@ -490,6 +490,18 @@ H = [
 % Dead-end: F
 
 %% c)
+H = [
+    0 0 0 0 1/3 0;
+    1 0 0 0 1/3 0;
+    0 1/2 0 1 0 0;
+    0 0 1 0 0 0;
+    0 1/2 0 0 0 0;
+    0 0 0 0 1/3 0
+    ];
+N = length(H);
+H(:, find(sum(H)==0)) = ones(N,1 )/N;
+H
+
 
 % Anexo 
 function [state] = crawl(H, first, last)
