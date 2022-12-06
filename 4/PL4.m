@@ -111,3 +111,47 @@ for i=1:3
     subplot(4,1,4)
     histogram(simulation_4{i, 1}, 100)
 end
+
+%% b)
+% hash table sizes
+table_sizes = [5e5 1e6 2e6];
+
+figure()
+
+hold on
+plot(table_sizes, [simulation_1{1:end, 2}])
+plot(table_sizes, [simulation_2{1:end, 2}])
+plot(table_sizes, [simulation_3{1:end, 2}])
+plot(table_sizes, [simulation_4{1:end, 2}])
+
+title('Number of colisions')
+legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
+
+
+max_1 = zeros(1,3);
+max_2 = zeros(1,3);
+max_3 = zeros(1,3);
+max_4 = zeros(1,3);
+
+for i=1:3
+    sim_1 = simulation_1{i, 1};
+    sim_2 = simulation_2{i, 1};
+    sim_3 = simulation_3{i, 1};
+    sim_4 = simulation_4{i, 1};
+    
+    % count the number of times the mode appeared
+    max_1(i) = sum(sim_1(:) == mode(sim_1));
+    max_2(i) = sum(sim_2(:) == mode(sim_2));
+    max_3(i) = sum(sim_3(:) == mode(sim_3));
+    max_4(i) = sum(sim_4(:) == mode(sim_4));
+end
+
+figure()
+hold on
+plot(table_sizes, max_1)
+plot(table_sizes, max_2)
+plot(table_sizes, max_3)
+plot(table_sizes, max_4)
+
+title('Max number of times indexes were used')
+legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
