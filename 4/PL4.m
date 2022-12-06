@@ -104,12 +104,16 @@ for i=1:3
     figure()
     subplot(4,1,1)
     histogram(simulation_1{i, 1}, 100)
+    title('djb2')
     subplot(4,1,2)
     histogram(simulation_2{i, 1}, 100)
+    title('sdbm')
     subplot(4,1,3)
     histogram(simulation_3{i, 1}, 100)
+    title('DJB31MA')
     subplot(4,1,4)
     histogram(simulation_4{i, 1}, 100)
+    title('hashstring')
 end
 
 %% b)
@@ -154,4 +158,20 @@ plot(table_sizes, max_3)
 plot(table_sizes, max_4)
 
 title('Max number of times indexes were used')
+legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
+
+%% c)
+
+% hash table sizes
+table_sizes = [5e5 1e6 2e6];
+
+figure()
+
+hold on
+plot(table_sizes, [simulation_1{1:end, 3}])
+plot(table_sizes, [simulation_2{1:end, 3}])
+plot(table_sizes, [simulation_3{1:end, 3}])
+plot(table_sizes, [simulation_4{1:end, 3}])
+
+title('Execution time')
 legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
