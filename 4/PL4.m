@@ -333,4 +333,9 @@ for i = 1:length(U1)
     bloom_filter = insert_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U1(i)));
 end
 
-
+% b)
+% Test if the same words are in Bloom Filter
+bools = zeros(1, length(U1));
+for i = 1:length(U1)
+    bools(i) = is_in_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U1(i)));
+end

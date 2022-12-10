@@ -1,4 +1,4 @@
-function bool = is_in_bloom_filter(bloom_filter, seeds, element)
+function bool = is_in_bloom_filter(bloom_filter, seeds, k, element)
 % Check if element is in bloom filter
 
 bool = true;
