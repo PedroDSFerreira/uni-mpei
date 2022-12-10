@@ -335,7 +335,18 @@ end
 
 % b)
 % Test if the same words are in Bloom Filter
-bools = zeros(1, length(U1));
+bools_b = zeros(1, length(U1));
 for i = 1:length(U1)
-    bools(i) = is_in_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U1(i)));
+    bools_b(i) = is_in_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U1(i)));
 end
+fprintf('\nFalse negatives: %.2f%%', length(find(bools_b==0))*100/length(bools_b))
+
+% c)
+% Test if different words are in Bloom Filter
+U2 = word_list(1001:2000);
+bools_c = zeros(1, length(U2));
+for i = 1:length(U2)
+    bools_c(i) = is_in_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U2(i)));
+end
+
+fprintf('\nFalse positives: %.2f%%\n', length(find(bools_c))*100/length(bools_c))
