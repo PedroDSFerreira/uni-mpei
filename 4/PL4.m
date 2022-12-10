@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-%% Ex. 1
+%% Parte I - Ex. 1
 
 %% a)
 N = 1e5;
@@ -116,9 +116,7 @@ for i=1:3
     title('hashstring')
 end
 
-%% b)
-% hash table sizes
-table_sizes = [5e5 1e6 2e6];
+% b)
 
 figure()
 
@@ -160,10 +158,7 @@ plot(table_sizes, max_4)
 title('Max number of times indexes were used')
 legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
 
-%% c)
-
-% hash table sizes
-table_sizes = [5e5 1e6 2e6];
+% c)
 
 figure()
 
@@ -321,3 +316,21 @@ plot(table_sizes, [simulation_4{1:end, 3}])
 
 title('Execution time')
 legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
+
+%% Parte II - Ex. 1
+% a)
+N = 8000;
+k = 3;
+word_list = readlines("wordlist-preao-20201103.txt");
+U1 = word_list(1:1000);
+
+% Initialize Bloom Filter
+bloom_filter = init_bloom_filter(N);
+
+seeds = randi(2^32, k);
+% Insert words in Bloom Filter
+for i = 1:length(U1)
+    bloom_filter = insert_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U1(i)));
+end
+
+
