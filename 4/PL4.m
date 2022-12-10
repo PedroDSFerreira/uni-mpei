@@ -357,4 +357,35 @@ m = length(U1);
 fprintf('\nTheoric value: %.2f%%', (1-exp(-(k*m)/n))^k*100)
 fprintf('\nPractical value: %.2f%%\n', length(find(bools_c))*100/length(bools_c))
 
-% Ex. 5
+%% Ex. 5
+n = 8000;
+word_list = readlines("wordlist-preao-20201103.txt");
+U1 = word_list(1:1000);
+false_positives = zeros(1, 7);
+k = 4:10;
+for j = 1:7
+    % Initialize Bloom Filter
+    bloom_filter = init_bloom_filter(n);
+    
+    seeds = randi(2^32, k(j));
+    % Insert words in Bloom Filter
+    for i = 1:length(U1)
+        bloom_filter = insert_bloom_filter(bloom_filter, seeds, k(j), convertStringsToChars(U1(i)));
+    end
+
+    % Test if different words are in Bloom Filter
+    U2 = word_list(1001:2000);
+    bools = zeros(1, length(U2));
+    for i = 1:length(U2)
+        bools(i) = is_in_bloom_filter(bloom_filter, seeds, k(j), convertStringsToChars(U2(i)));
+    end
+    
+    % Calculate false positives
+    false_positives(j) = length(find(bools))/length(bools);
+end
+
+plot(k, false_positives)
+
+m = length(U1);
+fprintf('\nTheoric value: %.2f%', (n*log(2))/m)
+fprintf('\nPractical value: %.2f%\n', k(find(false_positives==min(false_positives))))
