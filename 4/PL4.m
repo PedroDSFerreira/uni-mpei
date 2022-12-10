@@ -317,15 +317,15 @@ plot(table_sizes, [simulation_4{1:end, 3}])
 title('Execution time')
 legend('djb2', 'sdbm', 'DJB31MA', 'hashstring')
 
-%% Parte II - Ex. 1
-% a)
-N = 8000;
+%% Parte II
+% Ex. 1
+n = 8000;
 k = 3;
 word_list = readlines("wordlist-preao-20201103.txt");
 U1 = word_list(1:1000);
 
 % Initialize Bloom Filter
-bloom_filter = init_bloom_filter(N);
+bloom_filter = init_bloom_filter(n);
 
 seeds = randi(2^32, k);
 % Insert words in Bloom Filter
@@ -333,7 +333,7 @@ for i = 1:length(U1)
     bloom_filter = insert_bloom_filter(bloom_filter, seeds, k, convertStringsToChars(U1(i)));
 end
 
-% b)
+% Ex. 2
 % Test if the same words are in Bloom Filter
 bools_b = zeros(1, length(U1));
 for i = 1:length(U1)
@@ -341,7 +341,7 @@ for i = 1:length(U1)
 end
 fprintf('\nFalse negatives: %.2f%%', length(find(bools_b==0))*100/length(bools_b))
 
-% c)
+% Ex. 3
 % Test if different words are in Bloom Filter
 U2 = word_list(1001:2000);
 bools_c = zeros(1, length(U2));
@@ -350,3 +350,11 @@ for i = 1:length(U2)
 end
 
 fprintf('\nFalse positives: %.2f%%\n', length(find(bools_c))*100/length(bools_c))
+
+% Ex. 4
+% Theory slide num. 56
+m = length(U1);
+fprintf('\nTheoric value: %.2f%%', (1-exp(-(k*m)/n))^k*100)
+fprintf('\nPractical value: %.2f%%\n', length(find(bools_c))*100/length(bools_c))
+
+% Ex. 5
