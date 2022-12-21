@@ -418,8 +418,8 @@ for n = 1:Nu % Para cada utilizador
     Set{n} = [Set{n} u(ind,2)];
 end
 
-%% Calcula a distaˆncia de Jaccard entre todos os pares pela definic¸a˜o.
-J=zeros(Nu,Nu); % array para guardar distaˆnciasv
+% Calcula a distaˆncia de Jaccard entre todos os pares pela definic¸a˜o.
+J=zeros(Nu); % array para guardar distaˆnciasv
 h= waitbar(0,'Calculating');
 tic;
 for n1= 1:Nu
@@ -428,7 +428,7 @@ for n1= 1:Nu
         % Adicionar co´digo aqui
         C1 = Set{n1, 1};
         C2 = Set{n2, 1};
-        J(n1,n2) = length(intersect(C1, C2))/length(union(C1, C2));
+        J(n1,n2) = 1 - length(intersect(C1, C2))/length(union(C1, C2));
     end
 end
 t1 = toc;
@@ -460,5 +460,4 @@ switch opt
     case 'y'
         save('SimilarUsers.mat', 'SimilarUsers')
     otherwise
-        
 end
