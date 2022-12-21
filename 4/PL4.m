@@ -363,18 +363,18 @@ word_list = readlines("wordlist-preao-20201103.txt");
 U1 = word_list(1:1000);
 false_positives = zeros(1, 7);
 k = 4:10;
-for j = 1:7
+for j = k-3
     % Initialize Bloom Filter
     bloom_filter = init_bloom_filter(n);
     
-    seeds = randi(2^32, k(j));
+    seeds = randi(2^32, k(j), 1);
     % Insert words in Bloom Filter
     for i = 1:length(U1)
         bloom_filter = insert_bloom_filter(bloom_filter, seeds, k(j), convertStringsToChars(U1(i)));
     end
 
     % Test if different words are in Bloom Filter
-    U2 = word_list(1001:2000);
+    U2 = word_list(1001:11000);
     bools = zeros(1, length(U2));
     for i = 1:length(U2)
         bools(i) = is_in_bloom_filter(bloom_filter, seeds, k(j), convertStringsToChars(U2(i)));
@@ -385,7 +385,80 @@ for j = 1:7
 end
 
 plot(k, false_positives)
+hold on
+plot(k, (1-exp(-(k*m)/n)).^k)
+legend("Practical values", "Theoretical values")
 
 m = length(U1);
-fprintf('\nTheoric value: %.2f%', (n*log(2))/m)
-fprintf('\nPractical value: %.2f%\n', k(find(false_positives==min(false_positives))))
+fprintf('\nTheoretical value: %.2f', (n*log(2))/m)
+fprintf('\nPractical value: %.2f\n', k(find(false_positives==min(false_positives))))
+
+%% Parte III
+
+
+% Co´digo base para detec¸a˜o de pares similares
+udata=load('u.data');
+
+% Fica apenas com as duas primeiras colunas
+u = udata(1:end,1:2);
+clear udata;
+
+% Lista de utilizadores
+users = unique(u(:,1)); % Extrai os IDs dos utilizadores
+Nu = length(users); % Nu´mero de utilizadores
+
+% Constro´i a lista de filmes para cada utilizador
+Set = cell(Nu,1); % Usa ce´lulas
+
+for n = 1:Nu % Para cada utilizador
+    % Obte´m os filmes de cada um
+    ind = find(u(:,1) == users(n));
+    % E guarda num array. Usa ce´lulas porque utilizador tem um nu´mero
+    % diferente de filmes. Se fossem iguais podia ser um array
+    Set{n} = [Set{n} u(ind,2)];
+end
+
+%% Calcula a distaˆncia de Jaccard entre todos os pares pela definic¸a˜o.
+J=zeros(Nu,Nu); % array para guardar distaˆnciasv
+h= waitbar(0,'Calculating');
+tic;
+for n1= 1:Nu
+    waitbar(n1/Nu,h);
+    for n2= n1+1:Nu
+        % Adicionar co´digo aqui
+        C1 = Set{n1, 1};
+        C2 = Set{n2, 1};
+        J(n1,n2) = length(intersect(C1, C2))/length(union(C1, C2));
+    end
+end
+t1 = toc;
+delete(h);
+
+% Com base na distaˆncia, determina pares com
+% distaˆncia inferior a um limiar pre´-definido
+
+threshold =0.4; % limiar de decisa˜o
+
+% Array para guardar pares similares (user1, user2, distaˆncia)
+SimilarUsers= zeros(1,3);
+k= 1;
+tic;
+for n1= 1:Nu
+    for n2= n1+1:Nu
+        if J(n1,n2) < threshold
+            SimilarUsers(k,:) = [users(n1) users(n2) J(n1,n2)];
+            k= k+1;
+        end
+    end
+end
+t2 = toc;
+
+open('SimilarUsers')
+
+opt = input('Save? (y/n) ', 's');
+switch opt
+    case 'y'
+        save('SimilarUsers.mat', 'SimilarUsers')
+    otherwise
+        
+end
