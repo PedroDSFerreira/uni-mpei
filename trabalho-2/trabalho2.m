@@ -30,7 +30,23 @@ while true
     switch opt
         case 1
             display_movies(id, reviews, genres, cbf_1, seeds_1);
-        
+        case 2
+            % Get users with similar tastes (movies ranked>=3)
+            users = similar_users(id);
+            % Get unseen movies from similar users
+            movies = get_users_suggestions(id, users, reviews, genres);
+            display_suggestions(movies)
+        case 3
+            % For each movie already evaluated by the user, get similar unseen movies based on genres
+            movies_set = similar_movies(id, reviews, genres);
+            % Get the two most common movies from the set
+            movies = most_common_movies(id, movies_set, reviews, genres);
+            display_suggestions(movies)
+        case 4
+            title = input('Insert movie title: ', 's');
+            % Get movies with similar titles
+            movies = similar_titles(title);
+            display_suggestions(movies)
         case 5
             break;
 
