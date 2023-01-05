@@ -1,4 +1,4 @@
-function [Set] = get_users_info()
+function [Set, users, Nu] = get_users_info()
 % Co´digo base para detec¸a˜o de pares similares
 udata=load('u.data');
 
@@ -18,7 +18,7 @@ for n = 1:Nu % Para cada utilizador
     ind = find(u(:,1) == users(n));
     % E guarda num array. Usa ce´lulas porque utilizador tem um nu´mero
     % diferente de filmes. Se fossem iguais podia ser um array
-    Set{n} = [Set{n} u(ind,2)];
+    Set{n} = [Set{n} u(ind,2) u(ind,3)];
 end
 
 end
