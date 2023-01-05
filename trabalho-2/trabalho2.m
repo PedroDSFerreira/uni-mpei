@@ -29,7 +29,7 @@ while true
     
     switch opt
         case 1
-            display_movies(id, reviews, genres, cbf, seeds);
+            display_movies(id, reviews, genres, cbf_1, seeds_1);
         
         case 5
             break;
