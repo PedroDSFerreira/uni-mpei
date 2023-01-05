@@ -2,24 +2,8 @@ clc
 clear all
 close all
 
-% Initialization
-dic = readcell('u_item.txt', 'Delimiter', '\t');
-set = get_users_info();
-
-% Create counting bloom filter
-m = length(set);
-n = m * 8;
-k = round(n*log(2)/m);
-seeds = randi(2^32, k);
-
-cbf = init_bloom_filter(n);
-
-for i = 1:length(set)
-    for j = 1:length(set{i,1})
-        cbf = insert_bloom_filter(cbf, seeds, k, convertStringsToChars(dic{set{i,1}(j), 1}));
-    end
-end
-
+%-----RUN INIT.M FILE FIRST!-----
+load 'vars.mat'
 
 id = input('Insert User ID (1 to 943): ');
 % If the user ID is not valid, the program will ask for a new one
@@ -46,7 +30,7 @@ while true
     switch opt
         case 1
             display_movies(id, set, dic, cbf, seeds);
-
+        
         case 5
             break;
 
