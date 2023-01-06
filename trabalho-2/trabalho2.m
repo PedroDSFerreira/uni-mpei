@@ -4,6 +4,10 @@ close all
 
 %-----RUN INIT.M FILE FIRST!-----
 load 'vars.mat'
+load 'bf_1.mat'
+load 'bf_2.mat'
+load 'min_hash_3.m'
+
 
 id = input('Insert User ID (1 to 943): ');
 % If the user ID is not valid, the program will ask for a new one
@@ -32,7 +36,7 @@ while true
             display_movies(id, reviews, genres, cbf_1, seeds_1);
         case 2
             % Get users with similar tastes (movies ranked>=3)
-            users = similar_users(id);
+            users = similar_users(id, );
             % Get unseen movies from similar users
             movies = get_users_suggestions(id, users, reviews, genres);
             display_suggestions(movies)
