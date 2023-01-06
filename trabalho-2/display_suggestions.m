@@ -1,6 +1,6 @@
 function display_suggestions(movies)
 for i=1:length(movies)
-    disp(movies(i))
+    disp(['- ' convertStringsToChars(movies(i))])
 end
 end
 
