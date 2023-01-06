@@ -28,6 +28,7 @@ while true
     % If the option is not valid, the program will ask for a new one
     while opt < 1 || opt > 5
         opt = input('Invalid option. Select choice: ');
+        disp(' ')
     end
 
     
