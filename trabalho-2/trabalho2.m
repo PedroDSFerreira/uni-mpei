@@ -6,7 +6,7 @@ close all
 load 'vars.mat'
 load 'bf_1.mat'
 load 'bf_2.mat'
-load 'min_hash_3.m'
+load 'min_hash.mat'
 
 
 id = input('Insert User ID (1 to 943): ');
@@ -36,7 +36,7 @@ while true
             display_movies(id, reviews, genres, cbf_1, seeds_1);
         case 2
             % Get users with similar tastes (movies ranked>=3)
-            users = similar_users(id, );
+            users = similar_users(id, min_hash_3);
             % Get unseen movies from similar users
             movies = get_users_suggestions(id, users, reviews, genres);
             display_suggestions(movies)
