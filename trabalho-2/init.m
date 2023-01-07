@@ -57,7 +57,7 @@ for usr = 1:Nu
 end
 
 
-k_3 = 100;
+k_3 = 1000;
 seeds_3 = randi(2^32, k_3);
 min_hash_3 = zeros(Nm,k_3);
 genres_names = ["unknown" "Action" "Adventure" "Animation" "Childrens" "Comedy" ...
@@ -79,8 +79,32 @@ for movie = 1:Nm
 end
 
 
+k_4 = 100;
+seeds_4 = randi(2^32, k_4);
+s_size = 3;
+min_hash_4 = zeros(Nm,k_4);
+
+for i = 1:Nm
+    movie = lower(genres{i});
+    Ns = length(movie)-s_size+1;
+    hash_codes = inf(Ns, k_4);
+
+    shingles = {};
+    for j = 1:Ns
+        shingles{j} = movie(j:j+s_size-1);
+        
+        for h = 1:k_4
+            hash_codes(j, h) = DJB31MA([shingles{j}, h], seeds_4(h));
+        end
+    end
+
+    min_hash_4(i, :) = min(hash_codes);
+end
+
+
 
 save 'vars.mat' 'users' 'Nu' 'reviews' 'genres'
 save 'bf_1.mat' 'cbf_1' 'seeds_1'
 save 'min_hash_2.mat' 'min_hash_2'
 save 'min_hash_3.mat' 'min_hash_3'
+save 'min_hash_4.mat' 'min_hash_4' 's_size' 'seeds_4' 'k_4'

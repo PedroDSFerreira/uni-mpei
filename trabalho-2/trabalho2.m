@@ -7,6 +7,7 @@ load 'vars.mat'
 load 'bf_1.mat'
 load 'min_hash_2.mat'
 load 'min_hash_3.mat'
+load 'min_hash_4.mat'
 
 
 id = input('Insert User ID (1 to 943): ');
@@ -24,6 +25,7 @@ while true
     disp('5 - Exit');
 
     opt = input('Select choice: ');
+    disp(' ')
 
     % If the option is not valid, the program will ask for a new one
     while opt < 1 || opt > 5
@@ -52,10 +54,14 @@ while true
 
             display_suggestions(movies)
         case 4
-            title = input('Insert movie title: ', 's');
+            title = '';
+            while length(title) < s_size
+                title = lower(input(['Insert movie title (with at least ', num2str(s_size), ' characters): '], 's'));
+                disp(' ')
+            end
 
             % Get movies with similar titles
-            movies = similar_titles(title);
+            movies = similar_titles(title, genres, min_hash_4, s_size, seeds_4, k_4);
 
             display_suggestions(movies)
         case 5

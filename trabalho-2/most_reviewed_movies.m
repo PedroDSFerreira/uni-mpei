@@ -13,7 +13,6 @@ for i = 1:length(movies_set)
         end
     end
 end
-movie_counter
 % Sort the movies by the number of reviews
 movie_counter = sortrows(movie_counter, -2);
 
