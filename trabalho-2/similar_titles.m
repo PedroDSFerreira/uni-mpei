@@ -21,7 +21,7 @@ function movies = similar_titles(title, genres, min_hash, s_size, seeds, k)
     jaccard = zeros(1, Nm);
 
     for i = 1:Nm
-        jaccard(1,i) = sum(hashes==min_hash(i,:));
+        jaccard(1,i) = sum(hashes==min_hash(i,:))/k;
     end
 
     % Sort in ascending order
