@@ -103,10 +103,7 @@ alunos = 90;
 
 v = [alunos/2; alunos/4; alunos/4];
 
-for i=1:30-1
-    v = A*v;
-end
-
+v = A^(30)*v;
 round(v)
 
 %% d)
